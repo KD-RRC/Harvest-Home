@@ -7,38 +7,51 @@
     <%= csp_meta_tag %>
 
     <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Georgia, serif; color: #2c2c2c; background: #faf9f6; }
-  nav { background: #2d6a4f; padding: 1rem 2rem; }
-  nav h1 a { color: white; text-decoration: none; font-size: 1.5rem; }
-  .products-header { text-align: center; padding: 3rem 2rem 2rem; background: #eaf4ee; border-bottom: 2px solid #2d6a4f; }
-  .products-header h1 { font-size: 2rem; color: #2d6a4f; margin-bottom: 0.5rem; }
-  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
-  .product-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; transition: box-shadow 0.2s; }
-  .product-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-  .product-name a { color: #2d6a4f; text-decoration: none; font-size: 1.2rem; }
-  .category-tag { display: inline-block; background: #eaf4ee; color: #2d6a4f; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 4px 2px; }
-  .product-description { color: #666; margin: 0.75rem 0; font-size: 0.95rem; }
-  .product-price { font-size: 1.3rem; font-weight: bold; color: #2d6a4f; margin: 0.5rem 0; }
-  .in-stock { color: #2d6a4f; font-size: 0.9rem; }
-  .out-of-stock { color: #c0392b; font-size: 0.9rem; }
-  .btn-primary { display: inline-block; background: #2d6a4f; color: white; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; font-size: 0.9rem; }
-  .btn-primary:hover { background: #1a5c3a; }
-  .btn-secondary { display: inline-block; border: 2px solid #2d6a4f; color: #2d6a4f; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; font-size: 0.9rem; }
-  .product-show { max-width: 900px; margin: 2rem auto; padding: 0 2rem; }
-  .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; }
-  .breadcrumb a { color: #2d6a4f; text-decoration: none; }
-  .product-detail-price { font-size: 2rem; font-weight: bold; color: #2d6a4f; margin: 1rem 0; }
-  .product-detail-description { background: #faf9f6; border-left: 4px solid #2d6a4f; padding: 1rem 1.5rem; margin: 1.5rem 0; }
-  .product-sku { color: #999; font-size: 0.85rem; margin: 0.5rem 0; }
-  .notice { background: #eaf4ee; color: #2d6a4f; padding: 0.75rem 2rem; }
-  .alert { background: #fde8e8; color: #c0392b; padding: 0.75rem 2rem; }
-</style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: Georgia, serif; color: #2c2c2c; background: #faf9f6; }
+      nav { background: #2d6a4f; padding: 1rem 2rem; }
+      nav h1 a { color: white; text-decoration: none; font-size: 1.5rem; }
+      .products-header { text-align: center; padding: 3rem 2rem 2rem; background: #eaf4ee; border-bottom: 2px solid #2d6a4f; }
+      .products-header h1 { font-size: 2rem; color: #2d6a4f; margin-bottom: 0.5rem; }
+      .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+      .product-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; transition: box-shadow 0.2s; }
+      .product-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+      .product-name a { color: #2d6a4f; text-decoration: none; font-size: 1.2rem; }
+      .category-tag { display: inline-block; background: #eaf4ee; color: #2d6a4f; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 4px 2px; }
+      .product-description { color: #666; margin: 0.75rem 0; font-size: 0.95rem; }
+      .product-price { font-size: 1.3rem; font-weight: bold; color: #2d6a4f; margin: 0.5rem 0; }
+      .in-stock { color: #2d6a4f; font-size: 0.9rem; }
+      .out-of-stock { color: #c0392b; font-size: 0.9rem; }
+      .btn-primary { display: inline-block; background: #2d6a4f; color: white; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; font-size: 0.9rem; }
+      .btn-primary:hover { background: #1a5c3a; }
+      .btn-secondary { display: inline-block; border: 2px solid #2d6a4f; color: #2d6a4f; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; font-size: 0.9rem; }
+      .product-show { max-width: 900px; margin: 2rem auto; padding: 0 2rem; }
+      .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; }
+      .breadcrumb a { color: #2d6a4f; text-decoration: none; }
+      .product-detail-price { font-size: 2rem; font-weight: bold; color: #2d6a4f; margin: 1rem 0; }
+      .product-detail-description { background: #faf9f6; border-left: 4px solid #2d6a4f; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+      .product-sku { color: #999; font-size: 0.85rem; margin: 0.5rem 0; }
+      .notice { background: #eaf4ee; color: #2d6a4f; padding: 0.75rem 2rem; }
+      .alert { background: #fde8e8; color: #c0392b; padding: 0.75rem 2rem; }
+      nav { display: flex; justify-content: space-between; align-items: center; background: #2d6a4f; padding: 1rem 2rem; }
+      .nav-links a { color: white; text-decoration: none; margin-left: 1.5rem; font-family: Arial, sans-serif; }
+      .cart-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+      .cart-table th, .cart-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #ddd; font-family: Arial, sans-serif; }
+      .cart-table th { background: #eaf4ee; color: #2d6a4f; }
+      .qty-input { width: 60px; padding: 0.3rem; border: 1px solid #ddd; border-radius: 4px; }
+      .btn-small { background: #2d6a4f; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+      .btn-danger { background: #c0392b; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+      .cart-total { font-size: 1.3rem; margin: 1rem 0; padding: 1rem; background: #eaf4ee; border-radius: 4px; }
+          </style>
 
   </head>
   <body>
     <nav>
       <h1><%= link_to "Harvest & Home", root_path %></h1>
+      <div class="nav-links">
+        <%= link_to "Products", products_path %>
+        <%= link_to "Cart (#{(session[:cart] || {}).values.sum})", cart_path %>
+      </div>
     </nav>
 
     <% if notice %>

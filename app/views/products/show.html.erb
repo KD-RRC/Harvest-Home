@@ -36,6 +36,10 @@
         <% else %>
           <span class="out-of-stock">✗ Out of Stock</span>
         <% end %>
+
+        <% if @product.stock_quantity > 0 %>
+        <%= button_to "Add to Cart", add_to_cart_path(@product), method: :post, class: "btn-primary" %>
+        <% end %>
       </p>
 
       <%= link_to "← Back to Products", products_path, class: "btn-secondary" %>
