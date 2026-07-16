@@ -33,8 +33,9 @@
       .product-sku { color: #999; font-size: 0.85rem; margin: 0.5rem 0; }
       .notice { background: #eaf4ee; color: #2d6a4f; padding: 0.75rem 2rem; }
       .alert { background: #fde8e8; color: #c0392b; padding: 0.75rem 2rem; }
-      nav { display: flex; justify-content: space-between; align-items: center; background: #2d6a4f; padding: 1rem 2rem; }
-      .nav-links a { color: white; text-decoration: none; margin-left: 1.5rem; font-family: Arial, sans-serif; }
+      nav { display: flex; justify-content: space-between; align-items: center; background: #2d6a4f; padding: 0.75rem 2rem; flex-wrap: nowrap; }
+      .nav-links { display: flex; align-items: center; gap: 1.2rem; }
+      .nav-links a, .nav-links span { color: white; text-decoration: none; font-family: Arial, sans-serif; font-size: 0.9rem; white-space: nowrap; }
       .cart-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
       .cart-table th, .cart-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #ddd; font-family: Arial, sans-serif; }
       .cart-table th { background: #eaf4ee; color: #2d6a4f; }
@@ -42,7 +43,23 @@
       .btn-small { background: #2d6a4f; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
       .btn-danger { background: #c0392b; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
       .cart-total { font-size: 1.3rem; margin: 1rem 0; padding: 1rem; background: #eaf4ee; border-radius: 4px; }
-          </style>
+      .auth-container { max-width: 600px; margin: 2rem auto; padding: 0 2rem; }
+      .auth-container h2 { color: #2d6a4f; margin-bottom: 1.5rem; }
+      .form-section { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+      .form-section h3 { color: #2d6a4f; margin-bottom: 1rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+      .form-group { margin-bottom: 1rem; }
+      .form-group label { display: block; font-family: Arial, sans-serif; font-size: 0.9rem; color: #444; margin-bottom: 0.3rem; }
+      .form-input { width: 100%; padding: 0.6rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: Arial, sans-serif; }
+      .form-input:focus { outline: none; border-color: #2d6a4f; box-shadow: 0 0 0 2px rgba(45,106,79,0.1); }
+      .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .form-hint { font-size: 0.8rem; color: #999; font-family: Arial, sans-serif; }
+      .auth-errors { background: #fde8e8; border: 1px solid #c0392b; border-radius: 4px; padding: 1rem; margin-bottom: 1rem; color: #c0392b; font-family: Arial, sans-serif; font-size: 0.9rem; }
+      .auth-link { margin-top: 1rem; font-family: Arial, sans-serif; font-size: 0.9rem; color: #666; }
+      .auth-link a { color: #2d6a4f; }
+      nav span { color: white; font-family: Arial, sans-serif; font-size: 0.9rem; margin-left: 1.5rem; }
+      .btn-nav { background: none; border: none; color: white; font-family: Arial, sans-serif; font-size: 0.9rem; margin-left: 1.5rem; cursor: pointer; padding: 0; }
+      .btn-nav:hover { text-decoration: underline; }
+    </style>
 
   </head>
   <body>
@@ -51,6 +68,13 @@
       <div class="nav-links">
         <%= link_to "Products", products_path %>
         <%= link_to "Cart (#{(session[:cart] || {}).values.sum})", cart_path %>
+        <% if user_signed_in? %>
+          <span>Hi, <%= current_user.first_name.presence || current_user.email %></span>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn-nav" %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path %>
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
       </div>
     </nav>
 
