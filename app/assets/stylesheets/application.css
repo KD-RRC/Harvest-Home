@@ -1,10 +1,219 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+/* Harvest & Home - Main Stylesheet */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #2c2c2c;
+    background-color: #faf9f6;
+    line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+    background-color: #2d6a4f;
+    padding: 1rem 2rem;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+nav h1 a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+/* Products Index */
+.products-header {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background-color: #eaf4ee;
+    border-bottom: 2px solid #2d6a4f;
+}
+
+.products-header h1 {
+    font-size: 2rem;
+    color: #2d6a4f;
+    margin-bottom: 0.5rem;
+}
+
+.products-header p {
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Product Card */
+.product-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-body {
+    padding: 1.5rem;
+}
+
+.product-name a {
+    color: #2d6a4f;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.product-name a:hover {
+    text-decoration: underline;
+}
+
+.category-tag {
+    display: inline-block;
+    background: #eaf4ee;
+    color: #2d6a4f;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin: 4px 2px;
+    font-family: Arial, sans-serif;
+}
+
+.product-description {
+    color: #666;
+    margin: 0.75rem 0;
+    font-size: 0.95rem;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2d6a4f;
+    margin: 0.5rem 0;
+}
+
+.in-stock {
+    color: #2d6a4f;
+    font-size: 0.9rem;
+    font-family: Arial, sans-serif;
+}
+
+.out-of-stock {
+    color: #c0392b;
+    font-size: 0.9rem;
+    font-family: Arial, sans-serif;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background-color: #2d6a4f;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+.btn-primary:hover {
+    background-color: #1a5c3a;
+}
+
+.btn-secondary {
+    display: inline-block;
+    border: 2px solid #2d6a4f;
+    color: #2d6a4f;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+.btn-secondary:hover {
+    background-color: #eaf4ee;
+}
+
+/* Product Show */
+.product-show {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.breadcrumb {
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+    color: #2d6a4f;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.product-detail-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2d6a4f;
+    margin: 1rem 0;
+}
+
+.product-detail-description {
+    background: #faf9f6;
+    border-left: 4px solid #2d6a4f;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.product-detail-description h3 {
+    color: #2d6a4f;
+    margin-bottom: 0.5rem;
+}
+
+.product-sku {
+    color: #999;
+    font-size: 0.85rem;
+    font-family: Arial, sans-serif;
+    margin: 0.5rem 0;
+}
+
+/* Flash messages */
+.notice {
+    background: #eaf4ee;
+    color: #2d6a4f;
+    padding: 0.75rem 2rem;
+    border-bottom: 1px solid #2d6a4f;
+}
+
+.alert {
+    background: #fde8e8;
+    color: #c0392b;
+    padding: 0.75rem 2rem;
+    border-bottom: 1px solid #c0392b;
+}

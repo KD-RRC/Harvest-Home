@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Harvest And Home" %></title>
+    <title>Harvest And Home</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Harvest And Home">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
+    <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; color: #2c2c2c; background: #faf9f6; }
+  nav { background: #2d6a4f; padding: 1rem 2rem; }
+  nav h1 a { color: white; text-decoration: none; font-size: 1.5rem; }
+  .products-header { text-align: center; padding: 3rem 2rem 2rem; background: #eaf4ee; border-bottom: 2px solid #2d6a4f; }
+  .products-header h1 { font-size: 2rem; color: #2d6a4f; margin-bottom: 0.5rem; }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+  .product-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; transition: box-shadow 0.2s; }
+  .product-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .product-name a { color: #2d6a4f; text-decoration: none; font-size: 1.2rem; }
+  .category-tag { display: inline-block; background: #eaf4ee; color: #2d6a4f; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 4px 2px; }
+  .product-description { color: #666; margin: 0.75rem 0; font-size: 0.95rem; }
+  .product-price { font-size: 1.3rem; font-weight: bold; color: #2d6a4f; margin: 0.5rem 0; }
+  .in-stock { color: #2d6a4f; font-size: 0.9rem; }
+  .out-of-stock { color: #c0392b; font-size: 0.9rem; }
+  .btn-primary { display: inline-block; background: #2d6a4f; color: white; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; font-size: 0.9rem; }
+  .btn-primary:hover { background: #1a5c3a; }
+  .btn-secondary { display: inline-block; border: 2px solid #2d6a4f; color: #2d6a4f; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; font-size: 0.9rem; }
+  .product-show { max-width: 900px; margin: 2rem auto; padding: 0 2rem; }
+  .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; }
+  .breadcrumb a { color: #2d6a4f; text-decoration: none; }
+  .product-detail-price { font-size: 2rem; font-weight: bold; color: #2d6a4f; margin: 1rem 0; }
+  .product-detail-description { background: #faf9f6; border-left: 4px solid #2d6a4f; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+  .product-sku { color: #999; font-size: 0.85rem; margin: 0.5rem 0; }
+  .notice { background: #eaf4ee; color: #2d6a4f; padding: 0.75rem 2rem; }
+  .alert { background: #fde8e8; color: #c0392b; padding: 0.75rem 2rem; }
+</style>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
   </head>
-
   <body>
+    <nav>
+      <h1><%= link_to "Harvest & Home", root_path %></h1>
+    </nav>
+
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,44 @@
+<div class="product-show">
+  <div class="breadcrumb">
+    <%= link_to "Home", root_path %> &rsaquo;
+    <%= link_to "Products", products_path %> &rsaquo;
+    <%= @product.name %>
+  </div>
+
+  <div class="product-detail">
+    <div class="product-detail-info">
+      <h1><%= @product.name %></h1>
+
+      <p class="product-categories">
+        <% @product.categories.each do |category| %>
+          <span class="category-tag"><%= category.name %></span>
+        <% end %>
+      </p>
+
+      <p class="product-detail-price">
+        <% if @product.current_price %>
+          <%= number_to_currency(@product.current_price.amount) %>
+        <% else %>
+          Price not available
+        <% end %>
+      </p>
+
+      <div class="product-detail-description">
+        <h3>About this product</h3>
+        <p><%= @product.description %></p>
+      </div>
+
+      <p class="product-sku">SKU: <%= @product.sku %></p>
+
+      <p class="product-stock">
+        <% if @product.stock_quantity > 0 %>
+          <span class="in-stock">✓ In Stock (<%= @product.stock_quantity %> available)</span>
+        <% else %>
+          <span class="out-of-stock">✗ Out of Stock</span>
+        <% end %>
+      </p>
+
+      <%= link_to "← Back to Products", products_path, class: "btn-secondary" %>
+    </div>
+  </div>
+</div>

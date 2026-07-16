@@ -1,0 +1,10 @@
+<div class="products-header">
+  <h1>Manitoba Local Food Marketplace</h1>
+  <p>Fresh, local products from Manitoba producers delivered to your door.</p>
+</div>
+
+<div class="products-grid">
+  <% @products.each do |product| %>
+    <%= render 'product_card', product: product %>
+  <% end %>
+</div>
