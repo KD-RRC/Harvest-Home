@@ -59,6 +59,12 @@
       nav span { color: white; font-family: Arial, sans-serif; font-size: 0.9rem; margin-left: 1.5rem; }
       .btn-nav { background: none; border: none; color: white; font-family: Arial, sans-serif; font-size: 0.9rem; margin-left: 1.5rem; cursor: pointer; padding: 0; }
       .btn-nav:hover { text-decoration: underline; }
+      .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+      .category-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; }
+      .category-card h2 { margin-bottom: 0.5rem; }
+      .category-card h2 a { color: #2d6a4f; text-decoration: none; font-size: 1.1rem; }
+      .category-card p { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; font-family: Arial, sans-serif; }
+      .category-count { color: #2d6a4f; font-weight: bold; }
     </style>
 
   </head>
@@ -67,6 +73,7 @@
       <h1><%= link_to "Harvest & Home", root_path %></h1>
       <div class="nav-links">
         <%= link_to "Products", products_path %>
+        <%= link_to "Categories", categories_path %>
         <%= link_to "Cart (#{(session[:cart] || {}).values.sum})", cart_path %>
         <% if user_signed_in? %>
           <span>Hi, <%= current_user.first_name.presence || current_user.email %></span>
