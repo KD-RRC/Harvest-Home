@@ -2,8 +2,6 @@ source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.3"
-# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -14,8 +12,6 @@ gem "importmap-rails"
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-# Use Dart SASS [https://github.com/rails/dartsass-rails]
-gem "dartsass-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -70,3 +66,6 @@ end
 gem "activeadmin", "~> 3.5"
 
 gem "devise", "~> 5.0"
+
+gem "sprockets-rails"
+gem "sass-rails"

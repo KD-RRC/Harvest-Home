@@ -1,4 +1,4 @@
 //= link_tree ../images
-//= link active_admin.css
+//= link active_admin.scss
 //= link active_admin.js
 //= link application.css
