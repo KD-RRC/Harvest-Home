@@ -82,6 +82,7 @@
       .status-pending { background: #fff3cd; color: #856404; }
       .status-paid { background: #eaf4ee; color: #2d6a4f; }
       .status-shipped { background: #cce5ff; color: #004085; }
+      .status-badge { background: #eaf4ee; color: #2d6a4f; padding: 2px 8px; border-radius: 12px; font-size: 0.85rem; font-family: Arial, sans-serif; }
     </style>
 
   </head>
@@ -93,7 +94,7 @@
         <%= link_to "Categories", categories_path %>
         <%= link_to "Cart (#{(session[:cart] || {}).values.sum})", cart_path %>
         <% if user_signed_in? %>
-          <%= link_to "My Orders", "#" %>
+          <%= link_to "My Orders", orders_path %>
           <span>Hi, <%= current_user.first_name.presence || current_user.email %></span>
           <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn-nav" %>
         <% else %>

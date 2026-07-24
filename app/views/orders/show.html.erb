@@ -1,33 +1,34 @@
-<div class="checkout-container">
-  <div class="order-success">
-    <h1>✓ Order Confirmed!</h1>
-    <p>Thank you for your order. Your order number is <strong>#<%= @order.id %></strong>.</p>
+<div class="product-show">
+  <div class="breadcrumb">
+    <%= link_to "Home", root_path %> &rsaquo;
+    <%= link_to "My Orders", orders_path %> &rsaquo;
+    Order #<%= @order.id %>
   </div>
+
+  <h1>Order #<%= @order.id %></h1>
 
   <div class="form-section">
     <h3>Order Details</h3>
-    <p><strong>Status:</strong> <%= @order.status.capitalize %></p>
-    <p><strong>Shipping to:</strong> <%= @order.shipping_address %></p>
-    <p><strong>Ordered:</strong> <%= @order.created_at.strftime("%B %d, %Y") %></p>
+    <table class="invoice-table">
+      <tr><td>Date:</td><td><%= @order.created_at.strftime("%B %d, %Y at %I:%M %p") %></td></tr>
+      <tr><td>Status:</td><td><%= @order.status.capitalize %></td></tr>
+      <tr><td>Shipping to:</td><td><%= @order.shipping_address %></td></tr>
+      <tr><td>Province:</td><td><%= @order.province.name %></td></tr>
+    </table>
   </div>
 
   <div class="form-section">
     <h3>Items Ordered</h3>
     <table class="cart-table">
       <thead>
-        <tr>
-          <th>Product</th>
-          <th>Qty</th>
-          <th>Price Paid</th>
-          <th>Subtotal</th>
-        </tr>
+        <tr><th>Product</th><th>Unit Price</th><th>Qty</th><th>Subtotal</th></tr>
       </thead>
       <tbody>
-        <% @order_items.each do |item| %>
+        <% @order.order_items.each do |item| %>
           <tr>
             <td><%= item.product.name %></td>
-            <td><%= item.quantity %></td>
             <td><%= number_to_currency(item.unit_price_snapshot) %></td>
+            <td><%= item.quantity %></td>
             <td><%= number_to_currency(item.subtotal) %></td>
           </tr>
         <% end %>
@@ -35,17 +36,14 @@
     </table>
   </div>
 
-  <div class="form-section invoice-summary">
-    <div class="invoice-row">
-      <span>Tax (<%= @order.province.tax_description %>)</span>
-      <span><%= number_to_currency(@order.tax_amount) %></span>
-    </div>
-    <div class="invoice-row invoice-total">
-      <strong>Total Paid</strong>
-      <strong><%= number_to_currency(@order.total_amount) %></strong>
-    </div>
+  <div class="form-section">
+    <h3>Order Summary</h3>
+    <table class="invoice-table">
+      <tr><td>Subtotal:</td><td><%= number_to_currency(@order.total_amount - @order.tax_amount) %></td></tr>
+      <tr><td>Tax (<%= (@order.tax_rate_snapshot * 100).round(2) %>%):</td><td><%= number_to_currency(@order.tax_amount) %></td></tr>
+      <tr class="invoice-total"><td><strong>Total:</strong></td><td><strong><%= number_to_currency(@order.total_amount) %></strong></td></tr>
+    </table>
   </div>
 
-  <%= link_to "Continue Shopping", products_path, class: "btn-primary" %>
-  <%= link_to "View All Orders", orders_path, class: "btn-secondary" %>
+  <%= link_to "← Back to Orders", orders_path, class: "btn-secondary" %>
 </div>
