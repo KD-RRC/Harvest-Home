@@ -1,0 +1,21 @@
+<div class="checkout-container" style="text-align:center;">
+  <div class="order-complete">
+    <h1>✓ Order Placed!</h1>
+    <p>Thank you for your order from Harvest & Home.</p>
+
+    <% if @order %>
+      <div class="form-section" style="text-align:left; max-width:500px; margin:2rem auto;">
+        <h3>Order Confirmation</h3>
+        <table class="invoice-table">
+          <tr><td>Order #:</td><td><%= @order.id %></td></tr>
+          <tr><td>Status:</td><td><%= @order.status.capitalize %></td></tr>
+          <tr><td>Shipping to:</td><td><%= @order.shipping_address %></td></tr>
+          <tr><td>Tax:</td><td><%= number_to_currency(@order.tax_amount) %></td></tr>
+          <tr class="invoice-total"><td><strong>Total:</strong></td><td><strong><%= number_to_currency(@order.total_amount) %></strong></td></tr>
+        </table>
+      </div>
+    <% end %>
+
+    <%= link_to "Continue Shopping", products_path, class: "btn-primary" %>
+  </div>
+</div>

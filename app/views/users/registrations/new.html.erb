@@ -1,0 +1,79 @@
+<div class="auth-container">
+  <h2>Create Your Account</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <% if resource.errors.any? %>
+      <div class="auth-errors">
+        <% resource.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="form-section">
+      <h3>Account Details</h3>
+      <div class="form-group">
+        <%= f.label :email, "Email Address" %>
+        <%= f.email_field :email, autofocus: true, class: "form-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-input" %>
+        <span class="form-hint">Minimum 6 characters</span>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation, class: "form-input" %>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Personal Details</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <%= f.label :first_name, "First Name" %>
+          <%= f.text_field :first_name, class: "form-input" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :last_name, "Last Name" %>
+          <%= f.text_field :last_name, class: "form-input" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Shipping Address</h3>
+      <div class="form-group">
+        <%= f.label :address_line1, "Address Line 1" %>
+        <%= f.text_field :address_line1, class: "form-input" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :address_line2, "Address Line 2 (optional)" %>
+        <%= f.text_field :address_line2, class: "form-input" %>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <%= f.label :city %>
+          <%= f.text_field :city, class: "form-input" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :province %>
+          <%= f.select :province, [
+            ["Alberta", "AB"], ["British Columbia", "BC"], ["Manitoba", "MB"],
+            ["New Brunswick", "NB"], ["Newfoundland and Labrador", "NL"],
+            ["Northwest Territories", "NT"], ["Nova Scotia", "NS"],
+            ["Nunavut", "NU"], ["Ontario", "ON"], ["Prince Edward Island", "PE"],
+            ["Quebec", "QC"], ["Saskatchewan", "SK"], ["Yukon", "YT"]
+          ], { include_blank: "Select Province" }, class: "form-input" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :postal_code, "Postal Code" %>
+        <%= f.text_field :postal_code, class: "form-input", placeholder: "A1A 1A1" %>
+      </div>
+    </div>
+
+    <%= f.submit "Create Account", class: "btn-primary" %>
+    <p class="auth-link"><%= link_to "Already have an account? Log in", new_user_session_path %></p>
+  <% end %>
+</div>

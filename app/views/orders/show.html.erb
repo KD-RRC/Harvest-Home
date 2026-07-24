@@ -1,0 +1,51 @@
+<div class="checkout-container">
+  <div class="order-success">
+    <h1>✓ Order Confirmed!</h1>
+    <p>Thank you for your order. Your order number is <strong>#<%= @order.id %></strong>.</p>
+  </div>
+
+  <div class="form-section">
+    <h3>Order Details</h3>
+    <p><strong>Status:</strong> <%= @order.status.capitalize %></p>
+    <p><strong>Shipping to:</strong> <%= @order.shipping_address %></p>
+    <p><strong>Ordered:</strong> <%= @order.created_at.strftime("%B %d, %Y") %></p>
+  </div>
+
+  <div class="form-section">
+    <h3>Items Ordered</h3>
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price Paid</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_items.each do |item| %>
+          <tr>
+            <td><%= item.product.name %></td>
+            <td><%= item.quantity %></td>
+            <td><%= number_to_currency(item.unit_price_snapshot) %></td>
+            <td><%= number_to_currency(item.subtotal) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-section invoice-summary">
+    <div class="invoice-row">
+      <span>Tax (<%= @order.province.tax_description %>)</span>
+      <span><%= number_to_currency(@order.tax_amount) %></span>
+    </div>
+    <div class="invoice-row invoice-total">
+      <strong>Total Paid</strong>
+      <strong><%= number_to_currency(@order.total_amount) %></strong>
+    </div>
+  </div>
+
+  <%= link_to "Continue Shopping", products_path, class: "btn-primary" %>
+  <%= link_to "View All Orders", orders_path, class: "btn-secondary" %>
+</div>

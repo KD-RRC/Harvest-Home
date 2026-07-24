@@ -1,0 +1,26 @@
+<div class="product-card">
+  <div class="product-card-body">
+    <h2 class="product-name"><%= link_to product.name, product_path(product) %></h2>
+    <p class="product-categories">
+      <% product.categories.each do |category| %>
+        <span class="category-tag"><%= category.name %></span>
+      <% end %>
+    </p>
+    <p class="product-description"><%= truncate(product.description, length: 120) %></p>
+    <p class="product-price">
+      <% if product.current_price %>
+        <%= number_to_currency(product.current_price.amount) %>
+      <% else %>
+        <span class="no-price">Price not set</span>
+      <% end %>
+    </p>
+    <p class="product-stock">
+      <% if product.stock_quantity > 0 %>
+        <span class="in-stock">In Stock (<%= product.stock_quantity %> available)</span>
+      <% else %>
+        <span class="out-of-stock">Out of Stock</span>
+      <% end %>
+    </p>
+    <%= link_to "View Product", product_path(product), class: "btn-primary" %>
+  </div>
+</div>

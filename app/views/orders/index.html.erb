@@ -1,0 +1,20 @@
+<div class="checkout-container">
+  <h1>Your Orders</h1>
+
+  <% if @orders.empty? %>
+    <p>You haven't placed any orders yet. <%= link_to "Start shopping", products_path %></p>
+  <% else %>
+    <% @orders.each do |order| %>
+      <div class="form-section">
+        <div class="order-header">
+          <h3>Order #<%= order.id %></h3>
+          <span class="order-status status-<%= order.status %>"><%= order.status.capitalize %></span>
+        </div>
+        <p><strong>Date:</strong> <%= order.created_at.strftime("%B %d, %Y") %></p>
+        <p><strong>Items:</strong> <%= order.order_items.count %></p>
+        <p><strong>Total:</strong> <%= number_to_currency(order.total_amount) %></p>
+        <%= link_to "View Order", order_path(order), class: "btn-primary" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

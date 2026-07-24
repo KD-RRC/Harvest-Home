@@ -1,0 +1,55 @@
+<div class="checkout-container">
+  <h1>Checkout</h1>
+
+  <div class="checkout-grid">
+    <div class="checkout-form">
+      <%= form_with url: checkout_confirm_path, method: :post do |f| %>
+
+        <div class="form-section">
+          <h3>Order Summary</h3>
+          <table class="cart-table">
+            <thead>
+              <tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>
+            </thead>
+            <tbody>
+              <% @cart_items.each do |item| %>
+                <tr>
+                  <td><%= item[:product].name %></td>
+                  <td><%= item[:quantity] %></td>
+                  <td><%= number_to_currency(item[:product].current_price&.amount) %></td>
+                  <td><%= number_to_currency(item[:subtotal]) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <p class="checkout-subtotal">Subtotal: <strong><%= number_to_currency(@total) %></strong></p>
+        </div>
+
+        <div class="form-section">
+          <h3>Shipping Address</h3>
+          <div class="form-group">
+            <%= f.label :shipping_address, "Full Address" %>
+            <%= f.text_area :shipping_address, rows: 3, class: "form-input",
+                value: [current_user.address_line1, current_user.address_line2,
+                        current_user.city, current_user.province,
+                        current_user.postal_code].compact.join(", "),
+                placeholder: "Street address, city, province, postal code" %>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Province for Tax Calculation</h3>
+          <div class="form-group">
+            <%= f.label :province_id, "Your Province" %>
+            <%= f.select :province_id,
+                @provinces.map { |p| ["#{p.name} (#{p.tax_description})", p.id] },
+                { selected: @selected_province&.id, include_blank: "Select your province" },
+                class: "form-input" %>
+          </div>
+        </div>
+
+        <%= f.submit "Review Order →", class: "btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

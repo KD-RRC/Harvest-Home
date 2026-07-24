@@ -1,0 +1,20 @@
+<div class="products-header">
+  <h1><%= @category.name %></h1>
+  <p><%= @category.description %></p>
+</div>
+
+<div class="breadcrumb" style="padding: 1rem 2rem;">
+  <%= link_to "Home", root_path %> &rsaquo;
+  <%= link_to "Categories", categories_path %> &rsaquo;
+  <%= @category.name %>
+</div>
+
+<div class="products-grid">
+  <% if @products.any? %>
+    <% @products.each do |product| %>
+      <%= render 'products/product_card', product: product %>
+    <% end %>
+  <% else %>
+    <p style="padding: 2rem;">No products in this category yet.</p>
+  <% end %>
+</div>

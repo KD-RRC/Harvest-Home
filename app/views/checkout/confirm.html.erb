@@ -1,0 +1,49 @@
+<div class="checkout-container">
+  <h1>Review Your Order</h1>
+
+  <div class="form-section">
+    <h3>Order Items</h3>
+    <table class="cart-table">
+      <thead>
+        <tr><th>Product</th><th>Qty</th><th>Unit Price</th><th>Subtotal</th></tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |item| %>
+          <tr>
+            <td><%= item[:product].name %></td>
+            <td><%= item[:quantity] %></td>
+            <td><%= number_to_currency(item[:product].current_price&.amount) %></td>
+            <td><%= number_to_currency(item[:subtotal]) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-section invoice-summary">
+    <h3>Invoice</h3>
+    <table class="invoice-table">
+      <tr><td>Shipping to:</td><td><%= @address %></td></tr>
+      <tr><td>Province:</td><td><%= @province.name %></td></tr>
+      <tr><td>Subtotal:</td><td><%= number_to_currency(@subtotal) %></td></tr>
+      <% if @province.hst > 0 %>
+        <tr><td>HST (<%= (@province.hst * 100).round(1) %>%):</td><td><%= number_to_currency(@tax_amount) %></td></tr>
+      <% else %>
+        <% if @province.gst > 0 %>
+          <tr><td>GST (<%= (@province.gst * 100).round(1) %>%):</td><td><%= number_to_currency((@subtotal * @province.gst).round(2)) %></td></tr>
+        <% end %>
+        <% if @province.pst > 0 %>
+          <tr><td>PST (<%= (@province.pst * 100).round(1) %>%):</td><td><%= number_to_currency((@subtotal * @province.pst).round(2)) %></td></tr>
+        <% end %>
+      <% end %>
+      <tr class="invoice-total"><td><strong>Total:</strong></td><td><strong><%= number_to_currency(@total) %></strong></td></tr>
+    </table>
+  </div>
+
+  <div class="checkout-actions">
+    <%= form_with url: checkout_complete_path, method: :post do |f| %>
+      <%= f.submit "Place Order", class: "btn-primary" %>
+    <% end %>
+    <%= link_to "← Go Back", checkout_path, class: "btn-secondary" %>
+  </div>
+</div>
