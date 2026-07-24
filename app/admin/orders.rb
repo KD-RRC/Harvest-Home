@@ -7,10 +7,21 @@ ActiveAdmin.register Order do
   index do
     selectable_column
     id_column
-    column :user do |order| order.user.email end
+    column :user do |order|
+      order.user.email
+    end
     column :status
-    column :total_amount do |order| number_to_currency(order.total_amount) end
-    column :tax_amount do |order| number_to_currency(order.tax_amount) end
+    column "Products Ordered" do |order|
+      order.order_items.includes(:product).map { |item|
+        "#{item.product.name} x#{item.quantity}"
+      }.join(", ")
+    end
+    column "Tax" do |order|
+      number_to_currency(order.tax_amount)
+    end
+    column "Total" do |order|
+      number_to_currency(order.total_amount)
+    end
     column :created_at
     actions
   end
@@ -28,8 +39,13 @@ ActiveAdmin.register Order do
       row :user do |order| order.user.email end
       row :status
       row :shipping_address
-      row :total_amount do |order| number_to_currency(order.total_amount) end
-      row :tax_amount do |order| number_to_currency(order.tax_amount) end
+      row "Products Ordered" do |order|
+        order.order_items.includes(:product).map { |item|
+          "#{item.product.name} x#{item.quantity} @ #{number_to_currency(item.unit_price_snapshot)}"
+        }.join(", ")
+      end
+      row "Tax" do |order| number_to_currency(order.tax_amount) end
+      row "Total" do |order| number_to_currency(order.total_amount) end
       row :tax_rate_snapshot
       row :created_at
     end
