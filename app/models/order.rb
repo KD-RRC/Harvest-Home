@@ -1,3 +1,5 @@
+# Represents a customer order with immutable price and tax snapshots
+# Status flow: pending -> paid -> shipped -> cancelled
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :province
