@@ -2,7 +2,12 @@
   <h1>Your Cart</h1>
 
   <% if @cart_items.empty? %>
-    <p>Your cart is empty. <%= link_to "Browse products", products_path %></p>
+   <div class="empty-cart">
+  <h2>Your cart is empty</h2>
+  <p>Looks like you haven't added anything yet.</p>
+  <%= link_to "Browse Products", products_path, class: "btn-primary" %>
+  <%= link_to "Shop by Category", categories_path, class: "btn-secondary" %>
+</div>
   <% else %>
     <table class="cart-table">
       <thead>
