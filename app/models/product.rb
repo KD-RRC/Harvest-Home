@@ -1,3 +1,5 @@
+# Represents a product in the Harvest & Home marketplace
+# Products belong to vendors (future) and have price history via the prices table
 class Product < ApplicationRecord
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories
