@@ -83,12 +83,24 @@
       .status-paid { background: #eaf4ee; color: #2d6a4f; }
       .status-shipped { background: #cce5ff; color: #004085; }
       .status-badge { background: #eaf4ee; color: #2d6a4f; padding: 2px 8px; border-radius: 12px; font-size: 0.85rem; font-family: Arial, sans-serif; }
+      .nav-search { display: flex; align-items: center; gap: 0.5rem; }
+      .nav-search-input { padding: 0.4rem 0.8rem; border: none; border-radius: 4px; font-size: 0.9rem; width: 180px; }
+      .btn-nav-search { background: #1a5c3a; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+      .search-bar { display: flex; gap: 1rem; align-items: center; padding: 1rem 2rem; flex-wrap: wrap; }
+      .search-input { padding: 0.6rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; flex: 1; min-width: 200px; }
+      .search-select { width: auto; }
     </style>
 
   </head>
   <body>
     <nav>
       <h1><%= link_to "Harvest & Home", root_path %></h1>
+      <div class="nav-search">
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <%= f.text_field :q, placeholder: "Search...", class: "nav-search-input" %>
+          <%= f.submit "Search", class: "btn-nav-search" %>
+        <% end %>
+      </div>
       <div class="nav-links">
         <%= link_to "Products", products_path %>
         <%= link_to "Categories", categories_path %>

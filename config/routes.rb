@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :products,   only: [:index, :show]
   resources :categories, only: [:index, :show]
-  resources :orders, only: [:index, :show]
+  resources :orders,     only: [:index, :show]
 
   resource  :cart, only: [:show]
   post   '/cart/add/:product_id',    to: 'carts#add',    as: 'add_to_cart'
@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post '/checkout/confirm',  to: 'checkout#confirm',  as: 'checkout_confirm'
   post '/checkout/complete', to: 'checkout#complete', as: 'checkout_complete'
   get  '/checkout/done',     to: 'checkout#done',     as: 'checkout_done'
+
+  get '/search', to: 'search#index', as: 'search'
 
   root 'products#index'
 end

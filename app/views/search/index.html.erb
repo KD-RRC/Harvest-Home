@@ -1,0 +1,37 @@
+<div class="products-header">
+  <h1>Search Products</h1>
+
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <div class="search-bar">
+      <%= f.text_field :q, value: @query, placeholder: "Search products...", class: "search-input" %>
+      <%= f.select :category_id,
+          @categories.map { |c| [c.name, c.id] },
+          { include_blank: "All Categories", selected: @category&.id },
+          class: "form-input search-select" %>
+      <%= f.submit "Search", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<div style="padding: 1rem 2rem; font-family: Arial, sans-serif; color: #666;">
+  <% if @query.present? || @category %>
+    <p>
+      Showing results
+      <% if @query.present? %> for "<strong><%= @query %></strong>"<% end %>
+      <% if @category %> in <strong><%= @category.name %></strong><% end %>
+      — <%= @products.count %> product<%= @products.count == 1 ? "" : "s" %> found
+    </p>
+  <% end %>
+</div>
+
+<div class="products-grid">
+  <% if @products.any? %>
+    <% @products.each do |product| %>
+      <%= render 'products/product_card', product: product %>
+    <% end %>
+  <% else %>
+    <div style="padding: 2rem; font-family: Arial, sans-serif;">
+      <p>No products found. <%= link_to "Browse all products", products_path %></p>
+    </div>
+  <% end %>
+</div>
