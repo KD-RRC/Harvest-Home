@@ -2,6 +2,8 @@ require 'net/http'
 require 'json'
 
 puts "Clearing existing data..."
+OrderItem.destroy_all
+Order.destroy_all
 ProductCategory.destroy_all
 Price.destroy_all
 Product.destroy_all
