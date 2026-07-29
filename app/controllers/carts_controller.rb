@@ -16,12 +16,17 @@ class CartController < ApplicationController
 
   def add
     @product = Product.find(params[:product_id])
-    session[:cart] ||= {}
-    session[:cart][@product.id.to_s] ||= 0
-    session[:cart][@product.id.to_s] += 1
-    flash[:notice] = "#{@product.name} added to cart."
-    redirect_back fallback_location: products_path
-  end
+    if @product.stock_quantity <= 0
+      flash[:alert] = "Sorry, #{@product.name} is out of stock."
+      redirect_back fallback_location: products_path
+      return
+    end
+      session[:cart] ||= {}
+      session[:cart][@product.id.to_s] ||= 0
+      session[:cart][@product.id.to_s] += 1
+      flash[:notice] = "#{@product.name} added to cart."
+      redirect_back fallback_location: products_path
+    end
 
   def remove
     session[:cart]&.delete(params[:product_id].to_s)
