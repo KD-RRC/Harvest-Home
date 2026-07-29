@@ -1,5 +1,6 @@
 ActiveAdmin.register Product do
-  permit_params :name, :description, :sku, :stock_quantity, :active, category_ids: []
+  permit_params :name, :description, :sku, :stock_quantity, :active, :image, category_ids: []
+
 
   filter :name
   filter :sku
@@ -31,6 +32,7 @@ ActiveAdmin.register Product do
       f.input :stock_quantity
       f.input :active
       f.input :categories, as: :check_boxes, collection: Category.all
+      f.input :image, as: :file
     end
     f.actions
   end

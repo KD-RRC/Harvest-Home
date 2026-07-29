@@ -41,6 +41,16 @@
         <% if @product.stock_quantity > 0 %>
         <%= button_to "Add to Cart", add_to_cart_path(@product), method: :post, class: "btn-primary" %>
         <% end %>
+
+        <div class="product-detail-image">
+        <% if @product.image.attached? %>
+          <%= image_tag @product.image, alt: @product.name, class: "product-detail-img" %>
+        <% else %>
+          <div class="product-img-placeholder large">
+            <span>🌿</span>
+          </div>
+        <% end %>
+      </div>
       </p>
 
       <%= link_to "← Back to Products", products_path, class: "btn-secondary" %>
