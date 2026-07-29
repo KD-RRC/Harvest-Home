@@ -3,6 +3,7 @@
     <%= link_to "Home", root_path %> &rsaquo;
     <%= link_to "Products", products_path %> &rsaquo;
     <%= @product.name %>
+    <% content_for :title, @product.name %>
   </div>
 
   <div class="product-detail">
