@@ -6,6 +6,5 @@
 <div class="products-grid">
   <% @products.each do |product| %>
     <%= render 'product_card', product: product %> 
-    <% content_for :title, "Products" %>
   <% end %>
 </div>
