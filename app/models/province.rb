@@ -1,3 +1,5 @@
+# Stores Canadian provinces and territories with correct GST, PST and HST rates
+# Tax rates are used during checkout to calculate order totals
 class Province < ApplicationRecord
   has_many :orders
 
