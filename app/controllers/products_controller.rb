@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.where(active: true).includes(:categories, :prices)
+    @products = Product.where(active: true)
+                       .includes(:categories, :prices)
+                       .order(created_at: :desc)
   end
 
   def show
