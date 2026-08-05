@@ -12,7 +12,7 @@
 <div class="products-grid">
   <% if @products.any? %>
     <% @products.each do |product| %>
-      <%= render 'products/product_card', product: product %>
+                                      <%= render 'products/product_card', product: product %>
     <% end %>
   <% else %>
     <p style="padding: 2rem;">No products in this category yet.</p>

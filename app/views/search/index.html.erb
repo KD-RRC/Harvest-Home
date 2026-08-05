@@ -27,7 +27,7 @@
 <div class="products-grid">
   <% if @products.any? %>
     <% @products.each do |product| %>
-      <%= render 'products/product_card', product: product %>
+                                      <%= render 'products/product_card', product: product %>
     <% end %>
   <% else %>
     <div style="padding: 2rem; font-family: Arial, sans-serif;">

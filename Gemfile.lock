@@ -446,6 +446,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  kaminari (~> 1.2)
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 8.1.3)

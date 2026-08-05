@@ -1,4 +1,5 @@
 class ProductCategory < ApplicationRecord
+  # Relationships #
   belongs_to :product
   belongs_to :category
 

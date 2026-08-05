@@ -3,8 +3,13 @@
   <p>Fresh, local products from Manitoba producers delivered to your door.</p>
 </div>
 
+
 <div class="products-grid">
   <% @products.each do |product| %>
-    <%= render 'product_card', product: product %> 
+                                      <%= render 'product_card', product: product %>
   <% end %>
+</div>
+
+<div style="text-align: center; padding: 2rem; font-family: Arial, sans-serif;">
+  <%= paginate @products %>
 </div>

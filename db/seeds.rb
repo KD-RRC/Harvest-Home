@@ -70,6 +70,7 @@ end
 puts "\nCreated #{Product.count} hand-crafted Manitoba products."
 
 # ── API products to reach 100 total ──────────────────────────────────────────
+# Terminal run: rails runner "puts Product.where('sku LIKE ?', 'API-%').count" #
 def fetch_products(search_term, page = 1)
   url = URI("https://world.openfoodfacts.org/cgi/search.pl?search_terms=#{URI.encode_www_form_component(search_term)}&tagtype_0=countries&tag_contains_0=contains&tag_0=canada&action=process&json=1&page_size=30&page=#{page}&fields=product_name,generic_name_en,ingredients_text_en,quantity,brands")
   response = Net::HTTP.get(url)

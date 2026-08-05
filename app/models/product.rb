@@ -1,11 +1,15 @@
 # Represents a product in the Harvest & Home marketplace
 # Products belong to vendors (future) and have price history via the prices table
 class Product < ApplicationRecord
+  
+  # Relationships #
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories
   has_many :prices, dependent: :destroy
   has_one_attached :image
 
+
+  # Model Validations #
   validates :name, presence: true
   validates :description, presence: true
   validates :sku, presence: true, uniqueness: true

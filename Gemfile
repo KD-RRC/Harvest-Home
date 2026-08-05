@@ -69,3 +69,4 @@ gem "devise", "~> 5.0"
 
 gem "sprockets-rails"
 gem "sass-rails"
+gem "kaminari", "~> 1.2"
