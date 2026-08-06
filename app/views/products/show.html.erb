@@ -41,10 +41,12 @@
       <p class="product-sku">SKU: <%= @product.sku %></p>
 
       <p class="product-stock">
-        <% if @product.stock_quantity > 0 %>
-          <span class="in-stock">✓ In Stock (<%= @product.stock_quantity %> available)</span>
-        <% else %>
+        <% if @product.stock_quantity <= 0 %>
           <span class="out-of-stock">✗ Out of Stock</span>
+        <% elsif @product.stock_quantity <= 5 %>
+          <span style="color: #e67e22; font-family: Arial, sans-serif;">⚠ Low Stock — only <%= @product.stock_quantity %> left!</span>
+        <% else %>
+          <span class="in-stock">✓ In Stock (<%= @product.stock_quantity %> available)</span>
         <% end %>
       </p>
 
