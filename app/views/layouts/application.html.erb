@@ -147,7 +147,7 @@
         <% end %>
       </div>
       <div class="nav-links">
-        <%= link_to "Products", products_path %>
+        <%= link_to "Products (#{Product.where(active: true).count})", products_path %>
         <%= link_to "Categories", categories_path %>
         <%= link_to "Cart (#{(session[:cart] || {}).values.sum})", cart_path %>
         <% if user_signed_in? %>
