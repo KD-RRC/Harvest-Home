@@ -1,5 +1,10 @@
 # Represents a customer order with immutable price and tax snapshots
 # Status flow: pending -> paid -> shipped -> cancelled
+
+# Order stores immutable snapshots of prices and tax rates at time of purchase.
+# unit_price_snapshot on order_items ensures past orders are never affected by price changes.
+# tax_rate_snapshot ensures past orders are never affected by tax rate changes.
+# stripe_payment_id links this order to the Stripe payment record.
 class Order < ApplicationRecord
   
   #Relationships #
