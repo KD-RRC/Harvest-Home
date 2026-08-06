@@ -1,7 +1,7 @@
 class Price < ApplicationRecord
   belongs_to :product
 
-  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0.01 }
   validates :effective_date, presence: true
 
   def self.ransackable_attributes(auth_object = nil)

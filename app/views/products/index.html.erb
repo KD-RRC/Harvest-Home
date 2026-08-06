@@ -3,13 +3,24 @@
   <p>Fresh, local products from Manitoba producers delivered to your door.</p>
 </div>
 
-
-<div class="products-grid">
-  <% @products.each do |product| %>
-                                      <%= render 'product_card', product: product %>
-  <% end %>
+<div class="filter-bar">
+  <%= link_to "All Products", products_path, class: "filter-btn #{@filter.nil? ? 'active' : ''}" %>
+  <%= link_to "🆕 New Arrivals", products_path(filter: 'new'), class: "filter-btn #{@filter == 'new' ? 'active' : ''}" %>
+  <%= link_to "🏷 On Sale", products_path(filter: 'sale'), class: "filter-btn #{@filter == 'sale' ? 'active' : ''}" %>
 </div>
 
-<div style="text-align: center; padding: 2rem; font-family: Arial, sans-serif;">
-  <%= paginate @products %>
-</div>
+<% if @products.empty? %>
+  <div style="text-align: center; padding: 3rem; font-family: Arial, sans-serif;">
+    <p>No products found for this filter. <%= link_to "View all products", products_path %></p>
+  </div>
+<% else %>
+  <div class="products-grid">
+    <% @products.each do |product| %>
+      <%= render 'product_card', product: product %>
+    <% end %>
+  </div>
+
+  <div style="text-align: center; padding: 2rem; font-family: Arial, sans-serif;">
+    <%= paginate @products %>
+  </div>
+<% end %>

@@ -27,4 +27,12 @@ class Product < ApplicationRecord
   def current_price
     prices.order(effective_date: :desc).first
   end
+
+  def on_sale?
+    prices.count > 1 && current_price.amount < prices.order(effective_date: :asc).first.amount
+  end
+  
+  def new?
+    created_at >= 3.days.ago
+  end
 end
