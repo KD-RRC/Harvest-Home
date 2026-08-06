@@ -35,34 +35,43 @@ class CheckoutController < ApplicationController
   end
 
   def complete
-    checkout    = session[:checkout]
-    province    = Province.find(checkout['province_id'])
-    cart_items  = build_cart_items
-
+    checkout   = session[:checkout]
+    province   = Province.find(checkout['province_id'])
+    cart_items = build_cart_items
+  
+    # Create Stripe charge
+    begin
+      charge = Stripe::Charge.create(
+        amount:      (checkout['total'] * 100).to_i,
+        currency:    'cad',
+        source:      params[:stripe_token],
+        description: "Harvest & Home order for #{current_user.email}"
+      )
+    rescue Stripe::CardError => e
+      flash[:alert] = "Payment failed: #{e.message}"
+      redirect_to checkout_path and return
+    end
+  
     order = Order.new(
       user:              current_user,
       province:          province,
-      status:            'pending',
+      status:            'paid',
       shipping_address:  checkout['address'],
       tax_amount:        checkout['tax_amount'],
       tax_rate_snapshot: checkout['tax_rate'],
-      total_amount:      checkout['total']
+      total_amount:      checkout['total'],
+      stripe_payment_id: charge.id
     )
-
+  
+    cart_items.each do |item|
+      order.order_items.build(
+        product:             item[:product],
+        quantity:            item[:quantity],
+        unit_price_snapshot: item[:product].current_price.amount
+      )
+    end
+  
     if order.save
-      cart_items.each do |item|
-        order.order_items.create!(
-          product:             item[:product],
-          quantity:            item[:quantity],
-          unit_price_snapshot: item[:product].current_price.amount
-        )
-      end
-
-      def done
-        @order = Order.find_by(id: session[:order_id])
-        redirect_to root_path, alert: "No order found." unless @order
-      end
-
       session[:cart]     = {}
       session[:checkout] = nil
       session[:order_id] = order.id
