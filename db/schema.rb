@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_29_003739) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_153031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -91,6 +91,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_29_003739) do
     t.bigint "province_id", null: false
     t.string "shipping_address"
     t.string "status"
+    t.string "stripe_payment_id"
     t.decimal "tax_amount"
     t.decimal "tax_rate_snapshot"
     t.decimal "total_amount"
