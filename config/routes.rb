@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "pages/about"
+  get "pages/contact"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -21,4 +23,7 @@ Rails.application.routes.draw do
   get '/search', to: 'search#index', as: 'search'
 
   root 'products#index'
+
+  get '/about',   to: 'pages#about',   as: 'about'
+  get '/contact', to: 'pages#contact', as: 'contact'
 end
